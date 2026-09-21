@@ -29,12 +29,16 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    // Mobile dropdown toggle
+    // Dropdown toggle functionality
     const dropdownParents = document.querySelectorAll('.has-dropdown');
+
     dropdownParents.forEach(parent => {
       const parentLink = parent.querySelector('a');
+
+      // Prevent navigation on parent link click
       parentLink.addEventListener('click', function (e) {
         if (window.innerWidth <= 768) {
+          // Mobile: Click to toggle
           e.preventDefault();
           parent.classList.toggle('active');
 
@@ -44,6 +48,33 @@ document.addEventListener('DOMContentLoaded', function () {
               other.classList.remove('active');
             }
           });
+        } else {
+          // Desktop: Prevent navigation, use hover
+          e.preventDefault();
+        }
+      });
+
+      // Desktop: Hover to show
+      parent.addEventListener('mouseenter', function() {
+        if (window.innerWidth > 768) {
+          // Close other dropdowns
+          dropdownParents.forEach(other => {
+            if (other !== parent) {
+              other.classList.remove('active');
+            }
+          });
+          parent.classList.add('active');
+        }
+      });
+
+      parent.addEventListener('mouseleave', function() {
+        if (window.innerWidth > 768) {
+          // Small delay before closing
+          setTimeout(() => {
+            if (!parent.matches(':hover')) {
+              parent.classList.remove('active');
+            }
+          }, 100);
         }
       });
     });
@@ -87,11 +118,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- Close dropdown when clicking outside ---
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.has-dropdown') && window.innerWidth > 768) {
-      document.querySelectorAll('.has-dropdown').forEach(dropdown => {
+    const dropdowns = document.querySelectorAll('.has-dropdown');
+
+    if (!e.target.closest('.has-dropdown')) {
+      dropdowns.forEach(dropdown => {
         dropdown.classList.remove('active');
       });
     }
+  });
+
+  // --- Handle window resize for dropdown behavior ---
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 768) {
+        // Close mobile menu if open
+        const mainNav = document.querySelector('.main-nav');
+        const hamburger = document.querySelector('.hamburger');
+        const body = document.body;
+
+        if (mainNav && mainNav.classList.contains('open')) {
+          hamburger.classList.remove('active');
+          mainNav.classList.remove('open');
+          body.style.overflow = '';
+        }
+      }
+    }, 250);
   });
 
   // --- Contact Form Submit with Email & WhatsApp ---
