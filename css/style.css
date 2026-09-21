@@ -31,7 +31,8 @@ body { font-family: 'Open Sans', sans-serif; color: var(--text-dark); background
 a { text-decoration: none; color: inherit; transition: var(--transition); }
 ul, ol { list-style: none; }
 img { max-width: 100%; height: auto; display: block; }
-h1,h2,h3,h4,h5,h6 { font-family: 'Roboto', sans-serif; line-height: 1.3; color: var(--text-dark); }
+h1 { font-family: 'Roboto', sans-serif; line-height: 1.3; color: #ffffff; }
+h2,h3,h4,h5,h6 { font-family: 'Roboto', sans-serif; line-height: 1.3; color: var(--text-dark); }
 
 /* --- Top Bar --- */
 .top-bar {
