@@ -166,7 +166,10 @@
         <div class="contact-form">
           <h3>Request a Free Moving Quote</h3>
           <p class="subtitle">Get an instant estimate for your move. No obligations!</p>
-          <form id="contactForm" novalidate>
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+            <input type="hidden" name="subject" value="New Quote Request - Crown Packing And Shipping">
+            <input type="hidden" name="from_name" value="Crown Packing Website">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Full Name *</label>
@@ -228,7 +231,8 @@
               <textarea id="message" name="message" placeholder="Any special requirements, fragile items, packing instructions etc..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary form-submit">Get Free Quote Now</button>
-            <div id="successMsg" class="success-msg">Thank you! Our team will call you within 30 minutes with your free quote.</div>
+            <div id="successMsg" class="success-msg" style="display:none;">✅ Thank you! Our team will call you within 30 minutes with your free quote.</div>
+            <div id="errorMsg" style="display:none;background:#f8d7da;color:#721c24;padding:12px 16px;border-radius:8px;margin-top:12px;font-size:14px;font-weight:600;">❌ Sorry, there was an error. Please call us at 9953900400.</div>
           </form>
         </div>
       </div>
@@ -333,7 +337,13 @@
     </div>
   </footer>
 
-  <button id="backToTop" style="display:none;position:fixed;bottom:28px;right:28px;width:44px;height:44px;background:var(--primary);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:20px;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,53,128,0.4);z-index:999;">↑</button>
+  <!-- Floating CTA Buttons -->
+  <div class="floating-cta">
+    <a href="https://wa.me/919953900400?text=Hi%20Crown%20Packing,%20I%20need%20moving%20services" class="float-btn whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+    <a href="tel:9953900400" class="float-btn phone" aria-label="Call Now">📞</a>
+  </div>
+
+  <button id="backToTop" style="display:none;position:fixed;bottom:140px;right:28px;width:44px;height:44px;background:var(--primary);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:20px;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,53,128,0.4);z-index:999;" aria-label="Back to top">↑</button>
   <script src="js/main.js"></script>
 </body>
 </html>

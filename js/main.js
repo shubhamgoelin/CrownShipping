@@ -68,21 +68,62 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Contact Form Submit ---
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const btn = contactForm.querySelector('.form-submit');
       const successMsg = document.getElementById('successMsg');
+      const errorMsg = document.getElementById('errorMsg');
+
+      // Validate required fields
+      const name = contactForm.querySelector('#name').value.trim();
+      const phone = contactForm.querySelector('#phone').value.trim();
+      const from = contactForm.querySelector('#from').value.trim();
+      const to = contactForm.querySelector('#to').value.trim();
+
+      if (!name || !phone || !from || !to) {
+        alert('Please fill in all required fields (Name, Mobile, Moving From, Moving To)');
+        return;
+      }
+
+      // Validate phone number
+      if (!/^\d{10}$/.test(phone.replace(/\D/g, ''))) {
+        alert('Please enter a valid 10-digit mobile number');
+        return;
+      }
+
       btn.textContent = 'Sending...';
       btn.disabled = true;
-      setTimeout(function () {
-        btn.textContent = 'Get Free Quote';
-        btn.disabled = false;
-        contactForm.reset();
-        if (successMsg) {
-          successMsg.style.display = 'block';
-          setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+
+      try {
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          btn.textContent = 'Get Free Quote Now';
+          btn.disabled = false;
+          contactForm.reset();
+          if (successMsg) {
+            successMsg.style.display = 'block';
+            setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+          }
+        } else {
+          throw new Error('Form submission failed');
         }
-      }, 1400);
+      } catch (error) {
+        btn.textContent = 'Get Free Quote Now';
+        btn.disabled = false;
+        if (errorMsg) {
+          errorMsg.style.display = 'block';
+          setTimeout(() => { errorMsg.style.display = 'none'; }, 5000);
+        } else {
+          alert('Sorry, there was an error submitting the form. Please call us at 9953900400.');
+        }
+      }
     });
   }
 
