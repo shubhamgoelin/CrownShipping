@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const body = document.body;
 
   if (hamburger && mainNav) {
+    // Toggle menu
     hamburger.addEventListener('click', function () {
       hamburger.classList.toggle('active');
       mainNav.classList.toggle('open');
@@ -17,20 +18,42 @@ document.addEventListener('DOMContentLoaded', function () {
     // Close nav when clicking overlay
     mainNav.addEventListener('click', function (e) {
       if (e.target === mainNav) {
-        hamburger.classList.remove('active');
-        mainNav.classList.remove('open');
-        body.style.overflow = '';
+        closeMenu();
       }
     });
 
     // Close nav on ESC
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        hamburger.classList.remove('active');
-        mainNav.classList.remove('open');
-        body.style.overflow = '';
+        closeMenu();
       }
     });
+
+    // Mobile dropdown toggle
+    const dropdownParents = document.querySelectorAll('.has-dropdown');
+    dropdownParents.forEach(parent => {
+      const parentLink = parent.querySelector('a');
+      parentLink.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          parent.classList.toggle('active');
+
+          // Close other dropdowns
+          dropdownParents.forEach(other => {
+            if (other !== parent) {
+              other.classList.remove('active');
+            }
+          });
+        }
+      });
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('active');
+      mainNav.classList.remove('open');
+      body.style.overflow = '';
+      dropdownParents.forEach(parent => parent.classList.remove('active'));
+    }
   }
 
   // --- Active Nav Link ---
