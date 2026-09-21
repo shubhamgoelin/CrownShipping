@@ -1,21 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Background -->
-  <rect width="64" height="64" fill="#003580" rx="12"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#003580;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#001a40;stop-opacity:1" />
+    </linearGradient>
+  </defs>
 
-  <!-- Crown -->
-  <g transform="translate(32, 18)">
-    <rect x="-16" y="12" width="32" height="4" fill="#f5a623" rx="1"/>
-    <polygon points="-16,12 -10,4 -5,10 -5,12" fill="#f5a623"/>
-    <polygon points="-5,12 0,2 5,10 5,12" fill="#f5a623"/>
-    <polygon points="5,12 10,4 16,12" fill="#f5a623"/>
-    <circle cx="0" cy="4" r="1.5" fill="white" opacity="0.8"/>
-  </g>
+  <!-- Background -->
+  <rect width="32" height="32" fill="url(#bgGrad)" rx="6"/>
 
   <!-- Box -->
-  <rect x="16" y="32" width="32" height="24" fill="#1a4fa0" rx="2"/>
-  <line x1="32" y1="32" x2="32" y2="56" stroke="#003580" stroke-width="2"/>
-  <line x1="16" y1="44" x2="48" y2="44" stroke="#003580" stroke-width="2"/>
+  <rect x="7" y="16" width="18" height="12" fill="#1a4fa0" rx="1"/>
+  <rect x="7" y="16" width="18" height="12" fill="none" stroke="#003580" stroke-width="1"/>
+
+  <!-- Box Details -->
+  <line x1="16" y1="16" x2="16" y2="28" stroke="#003580" stroke-width="1.5"/>
+  <line x1="7" y1="22" x2="25" y2="22" stroke="#003580" stroke-width="1.5"/>
+
+  <!-- Crown -->
+  <g>
+    <rect x="10" y="13" width="12" height="2" fill="#f5a623" rx="0.5"/>
+    <polygon points="10,13 11.5,8 13,12 13,13" fill="#f5a623"/>
+    <polygon points="13,13 14.5,6 16,12 16,13" fill="#f5a623"/>
+    <polygon points="16,13 17.5,8 19,12 19,13" fill="#f5a623"/>
+    <polygon points="19,13 20.5,8 22,13" fill="#f5a623"/>
+    <circle cx="14.5" cy="9" r="0.8" fill="white" opacity="0.9"/>
+    <circle cx="16" cy="7" r="1" fill="white" opacity="0.9"/>
+    <circle cx="17.5" cy="9" r="0.8" fill="white" opacity="0.9"/>
+  </g>
 
   <!-- Letter C -->
-  <text x="32" y="49" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">C</text>
+  <text x="16" y="25" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="white" text-anchor="middle">C</text>
 </svg>

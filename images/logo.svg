@@ -1,43 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
-  <!-- Background Circle -->
-  <circle cx="100" cy="100" r="95" fill="#003580" opacity="0.1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a4fa0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#003580;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="crownGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f5a623;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e09010;stop-opacity:1" />
+    </linearGradient>
+  </defs>
 
-  <!-- Box Base -->
-  <rect x="60" y="110" width="80" height="60" fill="#003580" rx="4"/>
-  <rect x="65" y="115" width="70" height="50" fill="#1a4fa0" rx="3"/>
+  <!-- Main Box -->
+  <rect x="30" y="55" width="60" height="45" fill="url(#boxGrad)" rx="3"/>
 
-  <!-- Box Details -->
-  <line x1="100" y1="115" x2="100" y2="165" stroke="#003580" stroke-width="2"/>
-  <line x1="65" y1="140" x2="135" y2="140" stroke="#003580" stroke-width="2"/>
+  <!-- Box Tape - Vertical -->
+  <rect x="57" y="55" width="6" height="45" fill="#002060" opacity="0.3"/>
+
+  <!-- Box Tape - Horizontal -->
+  <rect x="30" y="75" width="60" height="6" fill="#002060" opacity="0.3"/>
+
+  <!-- Box Highlight -->
+  <rect x="35" y="60" width="20" height="30" fill="white" opacity="0.1" rx="2"/>
 
   <!-- Crown -->
-  <g transform="translate(100, 50)">
+  <g>
     <!-- Crown Base -->
-    <rect x="-35" y="30" width="70" height="8" fill="#f5a623" rx="2"/>
+    <rect x="38" y="48" width="44" height="6" fill="url(#crownGrad)" rx="2"/>
 
     <!-- Crown Points -->
-    <polygon points="-35,30 -25,10 -15,25 -15,30" fill="#f5a623"/>
-    <polygon points="-15,30 -5,5 5,25 5,30" fill="#f5a623"/>
-    <polygon points="5,30 15,10 25,25 25,30" fill="#f5a623"/>
-    <polygon points="25,30 35,15 35,30" fill="#f5a623"/>
-    <polygon points="-35,30 -35,15 -25,25" fill="#f5a623"/>
+    <path d="M 38 48 L 42 30 L 46 43 L 46 48 Z" fill="url(#crownGrad)"/>
+    <path d="M 46 48 L 50 25 L 54 43 L 54 48 Z" fill="url(#crownGrad)"/>
+    <path d="M 54 48 L 58 20 L 62 43 L 62 48 Z" fill="url(#crownGrad)"/>
+    <path d="M 62 48 L 66 25 L 70 43 L 70 48 Z" fill="url(#crownGrad)"/>
+    <path d="M 70 48 L 74 30 L 78 43 L 82 48 Z" fill="url(#crownGrad)"/>
 
     <!-- Crown Jewels -->
-    <circle cx="-25" cy="18" r="3" fill="#003580"/>
-    <circle cx="-5" cy="13" r="3" fill="#003580"/>
-    <circle cx="15" cy="18" r="3" fill="#003580"/>
+    <circle cx="42" cy="35" r="2.5" fill="#003580"/>
+    <circle cx="50" cy="30" r="2.5" fill="#003580"/>
+    <circle cx="58" cy="26" r="3" fill="#003580"/>
+    <circle cx="66" cy="30" r="2.5" fill="#003580"/>
+    <circle cx="74" cy="35" r="2.5" fill="#003580"/>
 
-    <!-- Crown Shine -->
-    <circle cx="-5" cy="10" r="2" fill="white" opacity="0.6"/>
-  </g>
-
-  <!-- Movement Lines (indicating shipping) -->
-  <g opacity="0.4">
-    <line x1="145" y1="120" x2="165" y2="120" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
-    <line x1="150" y1="130" x2="170" y2="130" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
-    <line x1="145" y1="140" x2="168" y2="140" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+    <!-- Sparkle on main jewel -->
+    <circle cx="57" cy="24" r="1.5" fill="white" opacity="0.8"/>
   </g>
 
   <!-- Handle -->
-  <path d="M 75 110 Q 75 95 100 95 Q 125 95 125 110" fill="none" stroke="#003580" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 45 55 Q 45 45 60 45 Q 75 45 75 55" fill="none" stroke="#003580" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Speed Lines (indicating movement) -->
+  <g opacity="0.5">
+    <line x1="92" y1="65" x2="105" y2="65" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="94" y1="75" x2="108" y2="75" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="92" y1="85" x2="106" y2="85" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Letter C in Box -->
+  <text x="60" y="85" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle" opacity="0.8">C</text>
 </svg>
