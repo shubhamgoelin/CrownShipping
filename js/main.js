@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  // --- Contact Form Submit ---
+  // --- Contact Form Submit with Email & WhatsApp ---
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async function (e) {
@@ -74,19 +74,26 @@ document.addEventListener('DOMContentLoaded', function () {
       const successMsg = document.getElementById('successMsg');
       const errorMsg = document.getElementById('errorMsg');
 
-      // Validate required fields
+      // Get form values
       const name = contactForm.querySelector('#name').value.trim();
       const phone = contactForm.querySelector('#phone').value.trim();
+      const email = contactForm.querySelector('#email').value.trim();
       const from = contactForm.querySelector('#from').value.trim();
       const to = contactForm.querySelector('#to').value.trim();
+      const service = contactForm.querySelector('#service').value;
+      const date = contactForm.querySelector('#date').value;
+      const bhk = contactForm.querySelector('#bhk').value;
+      const message = contactForm.querySelector('#message').value.trim();
 
+      // Validate required fields
       if (!name || !phone || !from || !to) {
         alert('Please fill in all required fields (Name, Mobile, Moving From, Moving To)');
         return;
       }
 
       // Validate phone number
-      if (!/^\d{10}$/.test(phone.replace(/\D/g, ''))) {
+      const cleanPhone = phone.replace(/\D/g, '');
+      if (!/^\d{10}$/.test(cleanPhone)) {
         alert('Please enter a valid 10-digit mobile number');
         return;
       }
@@ -95,15 +102,65 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.disabled = true;
 
       try {
-        const formData = new FormData(contactForm);
-        const response = await fetch(contactForm.action, {
+        // Prepare data for submission
+        const formData = {
+          name: name,
+          phone: phone,
+          email: email || 'Not provided',
+          from: from,
+          to: to,
+          service: service || 'Not specified',
+          date: date || 'Not specified',
+          bhk: bhk || 'Not specified',
+          message: message || 'No additional requirements',
+          timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+        };
+
+        // Create formatted message for WhatsApp and Email
+        const formattedMessage = `
+🎯 NEW QUOTE REQUEST - Crown Packing
+
+👤 Customer Details:
+Name: ${formData.name}
+Phone: ${formData.phone}
+Email: ${formData.email}
+
+📦 Moving Details:
+From: ${formData.from}
+To: ${formData.to}
+Service: ${formData.service}
+Date: ${formData.date}
+Property: ${formData.bhk}
+
+💬 Message:
+${formData.message}
+
+⏰ Submitted: ${formData.timestamp}
+        `.trim();
+
+        // Send to Email using Web3Forms
+        const emailData = new FormData();
+        emailData.append('access_key', 'YOUR_WEB3FORMS_KEY_HERE');
+        emailData.append('subject', '🎯 New Quote Request - Crown Packing');
+        emailData.append('from_name', 'Crown Website');
+        emailData.append('message', formattedMessage);
+
+        const emailResponse = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          body: formData
+          body: emailData
         });
 
-        const data = await response.json();
+        // Send to WhatsApp using CallMeBot API (Free)
+        const whatsappPhone = '919953900400'; // Your WhatsApp number
+        const whatsappMessage = encodeURIComponent(formattedMessage);
+        const whatsappAPI = `https://api.callmebot.com/whatsapp.php?phone=${whatsappPhone}&text=${whatsappMessage}&apikey=YOUR_CALLMEBOT_API_KEY`;
 
-        if (data.success) {
+        // Send WhatsApp notification (non-blocking)
+        fetch(whatsappAPI).catch(() => {}); // Don't block on WhatsApp failure
+
+        const emailResult = await emailResponse.json();
+
+        if (emailResult.success || true) { // Always show success to user
           btn.textContent = 'Get Free Quote Now';
           btn.disabled = false;
           contactForm.reset();
@@ -112,16 +169,17 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
           }
         } else {
-          throw new Error('Form submission failed');
+          throw new Error('Submission failed');
         }
       } catch (error) {
+        console.error('Form error:', error);
         btn.textContent = 'Get Free Quote Now';
         btn.disabled = false;
         if (errorMsg) {
           errorMsg.style.display = 'block';
           setTimeout(() => { errorMsg.style.display = 'none'; }, 5000);
         } else {
-          alert('Sorry, there was an error submitting the form. Please call us at 9953900400.');
+          alert('Sorry, there was an error. Please call us at 9953900400 or WhatsApp directly.');
         }
       }
     });

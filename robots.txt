@@ -1,0 +1,11 @@
+# Crown Packing And Shipping - Robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://crownpackingshipping.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
