@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="#003580" opacity="0.1"/>
+
+  <!-- Box Base -->
+  <rect x="60" y="110" width="80" height="60" fill="#003580" rx="4"/>
+  <rect x="65" y="115" width="70" height="50" fill="#1a4fa0" rx="3"/>
+
+  <!-- Box Details -->
+  <line x1="100" y1="115" x2="100" y2="165" stroke="#003580" stroke-width="2"/>
+  <line x1="65" y1="140" x2="135" y2="140" stroke="#003580" stroke-width="2"/>
+
+  <!-- Crown -->
+  <g transform="translate(100, 50)">
+    <!-- Crown Base -->
+    <rect x="-35" y="30" width="70" height="8" fill="#f5a623" rx="2"/>
+
+    <!-- Crown Points -->
+    <polygon points="-35,30 -25,10 -15,25 -15,30" fill="#f5a623"/>
+    <polygon points="-15,30 -5,5 5,25 5,30" fill="#f5a623"/>
+    <polygon points="5,30 15,10 25,25 25,30" fill="#f5a623"/>
+    <polygon points="25,30 35,15 35,30" fill="#f5a623"/>
+    <polygon points="-35,30 -35,15 -25,25" fill="#f5a623"/>
+
+    <!-- Crown Jewels -->
+    <circle cx="-25" cy="18" r="3" fill="#003580"/>
+    <circle cx="-5" cy="13" r="3" fill="#003580"/>
+    <circle cx="15" cy="18" r="3" fill="#003580"/>
+
+    <!-- Crown Shine -->
+    <circle cx="-5" cy="10" r="2" fill="white" opacity="0.6"/>
+  </g>
+
+  <!-- Movement Lines (indicating shipping) -->
+  <g opacity="0.4">
+    <line x1="145" y1="120" x2="165" y2="120" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+    <line x1="150" y1="130" x2="170" y2="130" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+    <line x1="145" y1="140" x2="168" y2="140" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Handle -->
+  <path d="M 75 110 Q 75 95 100 95 Q 125 95 125 110" fill="none" stroke="#003580" stroke-width="3" stroke-linecap="round"/>
+</svg>
